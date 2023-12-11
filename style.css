@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.background {
+    background-image: url('./background.png');
+    width: 100%;
+    background-size: 80% 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    display: flex;
+}
+
+.left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.title {
+    color: white;
+    font-size: 2rem;
+    /* font-family: ; */
+}
+
+.right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.forgot {
+    align-self: flex-end;
+    margin-right: 80px;
+    color: #FF5450;
+    font-weight: 600;
+}
+
+
+.button {
+    border: none;
+    background-color: #FF5450;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: 40%;
+    font-weight: bold;
+}
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+.custom-input {
+    position: relative;
+    width: 400px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 40px;
+    padding-right: 0px;
+    border: 1px solid #FF5450;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+    color: #FF5450;
+}
+
+/* Styling for the icon */
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    z-index: 1;
+    color: #FF5450;
+}
+
+/* Additional styling for the icon */
+.icon i {
+    font-size: 18px;
+}
+
+/* Optional focus effect */
+/* input[type="text"]:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+} */
