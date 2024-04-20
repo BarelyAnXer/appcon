@@ -520,29 +520,6 @@ class _BDISAnswerSheetWidgetState extends State<BDISAnswerSheetWidget> {
                           _model.textControllerValidator.asValidator(context),
                     ),
                   ),
-                  Builder(
-                    builder: (context) {
-                      final tempo = _model.remarks.toList();
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        itemCount: tempo.length,
-                        itemBuilder: (context, tempoIndex) {
-                          final tempoItem = tempo[tempoIndex];
-                          return Text(
-                            _model.remarks[tempoIndex],
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  letterSpacing: 0.0,
-                                ),
-                          );
-                        },
-                      );
-                    },
-                  ),
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
