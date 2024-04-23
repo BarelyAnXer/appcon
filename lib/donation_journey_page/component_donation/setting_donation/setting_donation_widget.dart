@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'setting_donation_model.dart';
@@ -159,6 +160,20 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                                           _model.selectBloodCenterValue = val),
                                       width: 300.0,
                                       height: 56.0,
+                                      searchHintTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .labelMedium
+                                              .override(
+                                                fontFamily: 'Roboto',
+                                                letterSpacing: 0.0,
+                                              ),
+                                      searchTextStyle:
+                                          FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Roboto',
+                                                letterSpacing: 0.0,
+                                              ),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -166,6 +181,7 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       hintText: 'Blood Center',
+                                      searchHintText: 'Search for an item...',
                                       icon: Icon(
                                         Icons.keyboard_arrow_down_rounded,
                                         color: FlutterFlowTheme.of(context)
@@ -182,7 +198,7 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                                           16.0, 4.0, 16.0, 4.0),
                                       hidesUnderline: true,
                                       isOverButton: true,
-                                      isSearchable: false,
+                                      isSearchable: true,
                                       isMultiSelect: false,
                                     );
                                   },
@@ -334,7 +350,9 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                                   0.0, 0.0, 10.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  Navigator.pop(context);
+                                  await actions.textToSpeech(
+                                    context,
+                                  );
                                 },
                                 text: 'Cancel',
                                 options: FFButtonOptions(
@@ -365,6 +383,10 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                                   0.0, 0.0, 5.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  _model.temp = await actions.getBloodCenter(
+                                    'temp',
+                                  );
+
                                   await BloodStocksRecord.collection
                                       .doc()
                                       .set(createBloodStocksRecordData(
@@ -376,13 +398,13 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                                                 .convertIDToRef(_model
                                                     .selectBloodCenterValue)
                                                 ?.id),
-                                        bloodcenter:
-                                            functions.centerIDToBloodCenterName(
-                                                _model.selectBloodCenterValue),
+                                        bloodcenter: _model.temp,
                                         blooddonorid: currentUserReference,
                                       ));
 
                                   context.pushNamed('DonationJourney');
+
+                                  setState(() {});
                                 },
                                 text: 'Donate',
                                 options: FFButtonOptions(

@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/donation_journey_page/component_donation/donation_sureness/donation_sureness_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -15,26 +14,10 @@ export 'check_donation_drive_model.dart';
 class CheckDonationDriveWidget extends StatefulWidget {
   const CheckDonationDriveWidget({
     super.key,
-    required this.blooddrivetitle,
-    required this.donationdriveDate,
-    required this.blooddriveBarangay,
-    required this.blooddriveProvince,
-    required this.blooddriveStreetestablishment,
-    required this.blooddriveTownmunicipality,
-    required this.blooddriveZip,
-    required this.blooddriveImage,
-    required this.bloodDriveID,
+    required this.bloodDriveReference,
   });
 
-  final String? blooddrivetitle;
-  final DateTime? donationdriveDate;
-  final String? blooddriveBarangay;
-  final String? blooddriveProvince;
-  final String? blooddriveStreetestablishment;
-  final String? blooddriveTownmunicipality;
-  final String? blooddriveZip;
-  final String? blooddriveImage;
-  final DocumentReference? bloodDriveID;
+  final DocumentReference? bloodDriveReference;
 
   @override
   State<CheckDonationDriveWidget> createState() =>
@@ -108,14 +91,8 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
         sigmaX: 5.0,
         sigmaY: 4.0,
       ),
-      child: StreamBuilder<List<BloodDriveRecord>>(
-        stream: queryBloodDriveRecord(
-          queryBuilder: (bloodDriveRecord) => bloodDriveRecord.where(
-            'bloodrive_id',
-            isEqualTo: widget.bloodDriveID?.id,
-          ),
-          singleRecord: true,
-        ),
+      child: StreamBuilder<BloodDriveRecord>(
+        stream: BloodDriveRecord.getDocument(widget.bloodDriveReference!),
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -131,15 +108,7 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
               ),
             );
           }
-          List<BloodDriveRecord> containerBloodDriveRecordList = snapshot.data!;
-          // Return an empty Container when the item does not exist.
-          if (snapshot.data!.isEmpty) {
-            return Container();
-          }
-          final containerBloodDriveRecord =
-              containerBloodDriveRecordList.isNotEmpty
-                  ? containerBloodDriveRecordList.first
-                  : null;
+          final containerBloodDriveRecord = snapshot.data!;
           return Container(
             width: double.infinity,
             height: double.infinity,
@@ -259,10 +228,7 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
                                   ],
                                 ),
                                 Text(
-                                  valueOrDefault<String>(
-                                    widget.blooddrivetitle,
-                                    'BLOOD DRIVE TITLE',
-                                  ),
+                                  containerBloodDriveRecord.blooddrivetitle,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -292,8 +258,10 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
                                         padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 0.0, 0.0, 0.0),
                                         child: Text(
-                                          dateTimeFormat('yMMMd',
-                                              widget.donationdriveDate),
+                                          dateTimeFormat(
+                                              'yMMMd',
+                                              containerBloodDriveRecord
+                                                  .donationdriveDate!),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -324,7 +292,7 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
                                               const EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 0.0, 0.0),
                                           child: Text(
-                                            '${widget.blooddriveBarangay} ${widget.blooddriveProvince} ${widget.blooddriveStreetestablishment} ${widget.blooddriveTownmunicipality}',
+                                            '${containerBloodDriveRecord.blooddriveBarangay} ${containerBloodDriveRecord.blooddriveProvince} ${containerBloodDriveRecord.blooddriveStreetestablishment} ${containerBloodDriveRecord.blooddriveTownmunicipality}',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -359,34 +327,23 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
                                                 .doc()
                                                 .set(
                                                     createBloodStocksRecordData(
-                                                  donationtype: '',
+                                                  donationtype: 'BloodDrive',
                                                   blooddonorid:
                                                       currentUserReference,
                                                   appointmentdate:
-                                                      widget.donationdriveDate,
+                                                      containerBloodDriveRecord
+                                                          .donationdriveDate,
                                                   bloodcenter:
                                                       containerBloodDriveRecord
-                                                          ?.bloodcenter,
-                                                  blooddrivevid:
-                                                      widget.bloodDriveID,
+                                                          .bloodcenter,
+                                                  blooddrivevid: widget
+                                                      .bloodDriveReference,
+                                                  createdTime:
+                                                      getCurrentTimestamp,
                                                 ));
-                                            await showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              enableDrag: false,
-                                              context: context,
-                                              builder: (context) {
-                                                return Padding(
-                                                  padding:
-                                                      MediaQuery.viewInsetsOf(
-                                                          context),
-                                                  child:
-                                                      const DonationSurenessWidget(),
-                                                );
-                                              },
-                                            ).then(
-                                                (value) => safeSetState(() {}));
+
+                                            context
+                                                .pushNamed('DonationJourney');
                                           },
                                           text: 'Donate',
                                           options: FFButtonOptions(

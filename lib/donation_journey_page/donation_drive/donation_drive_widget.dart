@@ -201,7 +201,6 @@ class _DonationDriveWidgetState extends State<DonationDriveWidget> {
                           const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                       child: Container(
                         width: 100.0,
-                        height: 90.0,
                         decoration: BoxDecoration(
                           color: const Color(0xFFEAF4FF),
                           borderRadius: BorderRadius.circular(5.0),
@@ -352,74 +351,50 @@ class _DonationDriveWidgetState extends State<DonationDriveWidget> {
                                     Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Container(
-                                          width: 53.0,
-                                          height: 86.0,
-                                          decoration: const BoxDecoration(
-                                            color: Color(0xFFEAF4FF),
-                                          ),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                enableDrag: false,
-                                                context: context,
-                                                builder: (context) {
-                                                  return GestureDetector(
-                                                    onTap: () => _model
-                                                            .unfocusNode
-                                                            .canRequestFocus
-                                                        ? FocusScope.of(context)
-                                                            .requestFocus(_model
-                                                                .unfocusNode)
-                                                        : FocusScope.of(context)
-                                                            .unfocus(),
-                                                    child: Padding(
-                                                      padding: MediaQuery
-                                                          .viewInsetsOf(
-                                                              context),
-                                                      child:
-                                                          CheckDonationDriveWidget(
-                                                        blooddrivetitle:
-                                                            columnBloodDriveRecord
-                                                                .blooddrivetitle,
-                                                        donationdriveDate:
-                                                            columnBloodDriveRecord
-                                                                .donationdriveDate!,
-                                                        blooddriveBarangay:
-                                                            columnBloodDriveRecord
-                                                                .blooddriveBarangay,
-                                                        blooddriveProvince:
-                                                            columnBloodDriveRecord
-                                                                .blooddriveProvince,
-                                                        blooddriveStreetestablishment:
-                                                            columnBloodDriveRecord
-                                                                .blooddriveStreetestablishment,
-                                                        blooddriveTownmunicipality:
-                                                            columnBloodDriveRecord
-                                                                .blooddriveTownmunicipality,
-                                                        blooddriveZip:
-                                                            columnBloodDriveRecord
-                                                                .blooddriveZip,
-                                                        blooddriveImage:
-                                                            columnBloodDriveRecord
-                                                                .blooddriveImage,
-                                                        bloodDriveID:
-                                                            columnBloodDriveRecord
-                                                                .reference,
-                                                      ),
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child:
+                                                        CheckDonationDriveWidget(
+                                                      bloodDriveReference:
+                                                          columnBloodDriveRecord
+                                                              .reference,
                                                     ),
-                                                  );
-                                                },
-                                              ).then((value) =>
-                                                  safeSetState(() {}));
-                                            },
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          },
+                                          child: Container(
+                                            width: 53.0,
+                                            height: 90.0,
+                                            decoration: const BoxDecoration(
+                                              color: Color(0xFFEAF4FF),
+                                            ),
                                             child: Icon(
                                               Icons.arrow_forward_ios,
                                               color:
@@ -433,7 +408,7 @@ class _DonationDriveWidgetState extends State<DonationDriveWidget> {
                                     ),
                                   ],
                                 );
-                              }),
+                              }).divide(const SizedBox(height: 10.0)),
                             );
                           },
                         ),

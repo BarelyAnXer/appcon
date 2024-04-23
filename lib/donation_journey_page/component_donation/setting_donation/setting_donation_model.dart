@@ -14,6 +14,8 @@ class SettingDonationModel extends FlutterFlowModel<SettingDonationWidget> {
   String? selectBloodCenterValue;
   FormFieldController<String>? selectBloodCenterValueController;
   DateTime? datePicked;
+  // Stores action output result for [Custom Action - getBloodCenter] action in Button widget.
+  String? temp;
 
   @override
   void initState(BuildContext context) {}

@@ -39,7 +39,7 @@ export '/homepage/home_page_plus/home_page_plus_widget.dart'
     show HomePagePlusWidget;
 export '/donation_journey_page/donation_journey/donation_journey_widget.dart'
     show DonationJourneyWidget;
-export '/homepage/donation_drive/donation_drive_widget.dart'
+export '/donation_journey_page/donation_drive/donation_drive_widget.dart'
     show DonationDriveWidget;
 export '/archives/startof_b_d_i_s/startof_b_d_i_s_widget.dart'
     show StartofBDISWidget;

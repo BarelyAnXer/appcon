@@ -20,22 +20,3 @@ DocumentReference? convertIDToRef(String? test) {
     return FirebaseFirestore.instance.collection('users').doc(test);
   }
 }
-
-String? centerIDToBloodCenterName(String? id) {
-  // get the id that is passed in parameter and query it to users collection using id
-  if (id == null) {
-    return null;
-  } else {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(id)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      Map<String, dynamic> data =
-          documentSnapshot.data() as Map<String, dynamic>;
-      print(data);
-      print(data['company_name']);
-      return data['company_name'];
-    });
-  }
-}
