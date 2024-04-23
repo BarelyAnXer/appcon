@@ -182,7 +182,7 @@ class _HomePagePlusWidgetState extends State<HomePagePlusWidget> {
                                   scrollDirection: Axis.horizontal,
                                   children: [
                                     Column(
-                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         InkWell(
                                           splashColor: Colors.transparent,
@@ -198,7 +198,7 @@ class _HomePagePlusWidgetState extends State<HomePagePlusWidget> {
                                             child: Image.asset(
                                               'assets/images/PicturePreparationCarousel.png',
                                               width: double.infinity,
-                                              height: 143.0,
+                                              height: 120.0,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -236,7 +236,7 @@ class _HomePagePlusWidgetState extends State<HomePagePlusWidget> {
                                 alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 0.0, 25.0),
+                                      16.0, 0.0, 0.0, 20.0),
                                   child:
                                       smooth_page_indicator.SmoothPageIndicator(
                                     controller: _model.pageViewController ??=

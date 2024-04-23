@@ -97,7 +97,7 @@ class _StartofBDISWidgetState extends State<StartofBDISWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed('BDISAnswerSheet');
+                    context.pushNamed('BDISInterface');
                   },
                   text: 'Answer Now',
                   options: FFButtonOptions(

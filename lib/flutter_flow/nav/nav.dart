@@ -270,9 +270,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DonationJourney',
           path: '/donationJourney',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'DonationJourney')
-              : const DonationJourneyWidget(),
+          builder: (context, params) => const DonationJourneyWidget(),
         ),
         FFRoute(
           name: 'DonationDrive',
@@ -309,12 +307,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'BDISOpening',
           path: '/bDISOpening',
-          builder: (context, params) => const BDISOpeningWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'BDISOpening')
+              : const BDISOpeningWidget(),
         ),
         FFRoute(
           name: 'BDISAnswerSheet',
           path: '/bDISAnswerSheet',
           builder: (context, params) => const BDISAnswerSheetWidget(),
+        ),
+        FFRoute(
+          name: 'NewBDIS',
+          path: '/newBDIS',
+          builder: (context, params) => const NewBDISWidget(),
         ),
         FFRoute(
           name: 'BDISSummary',

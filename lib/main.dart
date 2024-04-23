@@ -112,12 +112,12 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
+      'HomePagePlus': const HomePagePlusWidget(),
       'RequestPage': const RequestPageWidget(),
       'DonationJourneyPage': const DonationJourneyPageWidget(),
       'ProfilePage': const ProfilePageWidget(),
-      'HomePagePlus': const HomePagePlusWidget(),
-      'DonationJourney': const DonationJourneyWidget(),
       'StartofBDIS': const StartofBDISWidget(),
+      'BDISOpening': const BDISOpeningWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -136,6 +136,14 @@ class _NavBarPageState extends State<NavBarPage> {
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 24.0,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.handshake_outlined,
@@ -162,26 +170,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
-              size: 24.0,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.bloodtype_sharp,
-              size: 24.0,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.texture,
               size: 24.0,
             ),
             label: 'Testing',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 24.0,
+            ),
+            label: 'Home',
             tooltip: '',
           )
         ],

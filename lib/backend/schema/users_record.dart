@@ -130,6 +130,16 @@ class UsersRecord extends FirestoreRecord {
   String get gender => _gender ?? '';
   bool hasGender() => _gender != null;
 
+  // "is_superadmin" field.
+  bool? _isSuperadmin;
+  bool get isSuperadmin => _isSuperadmin ?? false;
+  bool hasIsSuperadmin() => _isSuperadmin != null;
+
+  // "company_name" field.
+  String? _companyName;
+  String get companyName => _companyName ?? '';
+  bool hasCompanyName() => _companyName != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -154,6 +164,8 @@ class UsersRecord extends FirestoreRecord {
     _level = snapshotData['level'] as String?;
     _houseno = snapshotData['houseno'] as String?;
     _gender = snapshotData['gender'] as String?;
+    _isSuperadmin = snapshotData['is_superadmin'] as bool?;
+    _companyName = snapshotData['company_name'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -213,6 +225,8 @@ Map<String, dynamic> createUsersRecordData({
   String? level,
   String? houseno,
   String? gender,
+  bool? isSuperadmin,
+  String? companyName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -239,6 +253,8 @@ Map<String, dynamic> createUsersRecordData({
       'level': level,
       'houseno': houseno,
       'gender': gender,
+      'is_superadmin': isSuperadmin,
+      'company_name': companyName,
     }.withoutNulls,
   );
 
@@ -272,7 +288,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.bloodtype == e2?.bloodtype &&
         e1?.level == e2?.level &&
         e1?.houseno == e2?.houseno &&
-        e1?.gender == e2?.gender;
+        e1?.gender == e2?.gender &&
+        e1?.isSuperadmin == e2?.isSuperadmin &&
+        e1?.companyName == e2?.companyName;
   }
 
   @override
@@ -299,7 +317,9 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.bloodtype,
         e?.level,
         e?.houseno,
-        e?.gender
+        e?.gender,
+        e?.isSuperadmin,
+        e?.companyName
       ]);
 
   @override

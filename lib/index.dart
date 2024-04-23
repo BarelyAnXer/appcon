@@ -1,14 +1,15 @@
 // Export pages
-export '/log_in_page/log_in_page_widget.dart' show LogInPageWidget;
+export '/unsorted/log_in_page/log_in_page_widget.dart' show LogInPageWidget;
 export '/onboarding_screen/onboarding_one/onboarding_one_widget.dart'
     show OnboardingOneWidget;
-export '/sign_up_personal/sign_up_personal_widget.dart'
+export '/unsorted/sign_up_personal/sign_up_personal_widget.dart'
     show SignUpPersonalWidget;
-export '/sign_up_account/sign_up_account_widget.dart' show SignUpAccountWidget;
-export '/request_page/request_page_widget.dart' show RequestPageWidget;
-export '/donation_journey_page/donation_journey_page_widget.dart'
+export '/archives/sign_up_account/sign_up_account_widget.dart'
+    show SignUpAccountWidget;
+export '/unsorted/request_page/request_page_widget.dart' show RequestPageWidget;
+export '/unsorted/donation_journey_page/donation_journey_page_widget.dart'
     show DonationJourneyPageWidget;
-export '/profile_page/profile_page_widget.dart' show ProfilePageWidget;
+export '/unsorted/profile_page/profile_page_widget.dart' show ProfilePageWidget;
 export '/profile_pages/my_information_page/my_information_page_widget.dart'
     show MyInformationPageWidget;
 export '/profile_pages/my_information/edit_civil_status/edit_civil_status_widget.dart'
@@ -40,9 +41,9 @@ export '/donation_journey_page/donation_journey/donation_journey_widget.dart'
     show DonationJourneyWidget;
 export '/homepage/donation_drive/donation_drive_widget.dart'
     show DonationDriveWidget;
-export '/log_in_sign_up/bdis/startof_b_d_i_s/startof_b_d_i_s_widget.dart'
+export '/archives/startof_b_d_i_s/startof_b_d_i_s_widget.dart'
     show StartofBDISWidget;
-export '/log_in_sign_up/bdis/b_d_i_s_interface/b_d_i_s_interface_widget.dart'
+export '/archives/b_d_i_s_interface/b_d_i_s_interface_widget.dart'
     show BDISInterfaceWidget;
 export '/homepage/preparation/preparation_widget.dart' show PreparationWidget;
 export '/homepage/benefits/benefits_widget.dart' show BenefitsWidget;
@@ -52,9 +53,10 @@ export '/donation_journey_page/bdis/b_d_i_s_opening/b_d_i_s_opening_widget.dart'
     show BDISOpeningWidget;
 export '/donation_journey_page/bdis/b_d_i_s_answer_sheet/b_d_i_s_answer_sheet_widget.dart'
     show BDISAnswerSheetWidget;
+export '/new_b_d_i_s/new_b_d_i_s_widget.dart' show NewBDISWidget;
 export '/donation_journey_page/bdis/b_d_i_s_summary/b_d_i_s_summary_widget.dart'
     show BDISSummaryWidget;
 export '/donation_journey_page/bdis/b_d_i_s_recap/b_d_i_s_recap_widget.dart'
     show BDISRecapWidget;
-export '/scheduled_donation_copy/scheduled_donation_copy_widget.dart'
+export '/unsorted/scheduled_donation_copy/scheduled_donation_copy_widget.dart'
     show ScheduledDonationCopyWidget;

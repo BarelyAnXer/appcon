@@ -250,7 +250,7 @@ class _ScheduledDonationWidgetState extends State<ScheduledDonationWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                'April 1, 2024',
+                                'asd',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -322,7 +322,7 @@ class _ScheduledDonationWidgetState extends State<ScheduledDonationWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 0.0, 0.0),
                               child: Text(
-                                '11:00 AM',
+                                'qwe',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -394,7 +394,7 @@ class _ScheduledDonationWidgetState extends State<ScheduledDonationWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   5.0, 0.0, 5.0, 0.0),
                               child: Text(
-                                '99 Potenciano Street, Malolos, Bulacan',
+                                'blood drive address',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

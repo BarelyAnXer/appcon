@@ -1,8 +1,11 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'setting_donation_model.dart';
 export 'setting_donation_model.dart';
@@ -110,40 +113,79 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     2.0, 0.0, 5.0, 0.0),
-                                child: FlutterFlowDropDown<String>(
-                                  controller: _model
-                                          .selectBloodCenterValueController ??=
-                                      FormFieldController<String>(null),
-                                  options: const ['Option 1'],
-                                  onChanged: (val) => setState(() =>
-                                      _model.selectBloodCenterValue = val),
-                                  width: 300.0,
-                                  height: 56.0,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintText: 'Blood Center',
-                                  icon: Icon(
-                                    Icons.keyboard_arrow_down_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
+                                child: StreamBuilder<List<UsersRecord>>(
+                                  stream: queryUsersRecord(
+                                    queryBuilder: (usersRecord) =>
+                                        usersRecord.where(
+                                      'is_superadmin',
+                                      isEqualTo: true,
+                                    ),
                                   ),
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  elevation: 2.0,
-                                  borderColor: const Color(0xFFBFBDBD),
-                                  borderWidth: 1.0,
-                                  borderRadius: 2.0,
-                                  margin: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 4.0, 16.0, 4.0),
-                                  hidesUnderline: true,
-                                  isOverButton: true,
-                                  isSearchable: false,
-                                  isMultiSelect: false,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50.0,
+                                          height: 50.0,
+                                          child: CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                              FlutterFlowTheme.of(context)
+                                                  .primary,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<UsersRecord>
+                                        selectBloodCenterUsersRecordList =
+                                        snapshot.data!;
+                                    return FlutterFlowDropDown<String>(
+                                      controller: _model
+                                              .selectBloodCenterValueController ??=
+                                          FormFieldController<String>(
+                                        _model.selectBloodCenterValue ??= '0',
+                                      ),
+                                      options: List<String>.from(
+                                          selectBloodCenterUsersRecordList
+                                              .map((e) => e.reference.id)
+                                              .toList()),
+                                      optionLabels:
+                                          selectBloodCenterUsersRecordList
+                                              .map((e) => e.companyName)
+                                              .toList(),
+                                      onChanged: (val) => setState(() =>
+                                          _model.selectBloodCenterValue = val),
+                                      width: 300.0,
+                                      height: 56.0,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            letterSpacing: 0.0,
+                                          ),
+                                      hintText: 'Blood Center',
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      fillColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      elevation: 2.0,
+                                      borderColor: const Color(0xFFBFBDBD),
+                                      borderWidth: 1.0,
+                                      borderRadius: 2.0,
+                                      margin: const EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 4.0, 16.0, 4.0),
+                                      hidesUnderline: true,
+                                      isOverButton: true,
+                                      isSearchable: false,
+                                      isMultiSelect: false,
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -291,8 +333,8 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 10.0, 0.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  Navigator.pop(context);
                                 },
                                 text: 'Cancel',
                                 options: FFButtonOptions(
@@ -322,8 +364,25 @@ class _SettingDonationWidgetState extends State<SettingDonationWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 5.0, 0.0),
                               child: FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  await BloodStocksRecord.collection
+                                      .doc()
+                                      .set(createBloodStocksRecordData(
+                                        appointmentdate: _model.datePicked,
+                                        donationtype: 'Appointment',
+                                        createdTime: getCurrentTimestamp,
+                                        bloodcenterUserid:
+                                            functions.convertIDToRef(functions
+                                                .convertIDToRef(_model
+                                                    .selectBloodCenterValue)
+                                                ?.id),
+                                        bloodcenter:
+                                            functions.centerIDToBloodCenterName(
+                                                _model.selectBloodCenterValue),
+                                        blooddonorid: currentUserReference,
+                                      ));
+
+                                  context.pushNamed('DonationJourney');
                                 },
                                 text: 'Donate',
                                 options: FFButtonOptions(
