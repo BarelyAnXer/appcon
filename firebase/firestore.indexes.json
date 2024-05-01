@@ -1,3 +1,18 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionGroup": "BloodStocks",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "blooddonorid",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "created_time",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }

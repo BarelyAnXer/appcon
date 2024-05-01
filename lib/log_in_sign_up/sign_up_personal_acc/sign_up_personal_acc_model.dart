@@ -4,6 +4,12 @@ import 'sign_up_personal_acc_widget.dart' show SignUpPersonalAccWidget;
 import 'package:flutter/material.dart';
 
 class SignUpPersonalAccModel extends FlutterFlowModel<SignUpPersonalAccWidget> {
+  ///  Local state fields for this page.
+
+  String? selectedProvince;
+
+  String? selectedCity;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -29,18 +35,15 @@ class SignUpPersonalAccModel extends FlutterFlowModel<SignUpPersonalAccWidget> {
   // State field(s) for CivilDropDown widget.
   String? civilDropDownValue;
   FormFieldController<String>? civilDropDownValueController;
-  // State field(s) for ProvinceTxt widget.
-  FocusNode? provinceTxtFocusNode;
-  TextEditingController? provinceTxtTextController;
-  String? Function(BuildContext, String?)? provinceTxtTextControllerValidator;
-  // State field(s) for CityTxt widget.
-  FocusNode? cityTxtFocusNode;
-  TextEditingController? cityTxtTextController;
-  String? Function(BuildContext, String?)? cityTxtTextControllerValidator;
-  // State field(s) for BarangayTxt widget.
-  FocusNode? barangayTxtFocusNode;
-  TextEditingController? barangayTxtTextController;
-  String? Function(BuildContext, String?)? barangayTxtTextControllerValidator;
+  // State field(s) for DropDownProvince widget.
+  String? dropDownProvinceValue;
+  FormFieldController<String>? dropDownProvinceValueController;
+  // State field(s) for DropDownCity widget.
+  String? dropDownCityValue;
+  FormFieldController<String>? dropDownCityValueController;
+  // State field(s) for DropDownBarangay widget.
+  String? dropDownBarangayValue;
+  FormFieldController<String>? dropDownBarangayValueController;
   // State field(s) for FullAddress widget.
   FocusNode? fullAddressFocusNode;
   TextEditingController? fullAddressTextController;
@@ -57,6 +60,9 @@ class SignUpPersonalAccModel extends FlutterFlowModel<SignUpPersonalAccWidget> {
   FocusNode? contactTxtFocusNode;
   TextEditingController? contactTxtTextController;
   String? Function(BuildContext, String?)? contactTxtTextControllerValidator;
+  // State field(s) for DropDownBloodType widget.
+  String? dropDownBloodTypeValue;
+  FormFieldController<String>? dropDownBloodTypeValueController;
 
   @override
   void initState(BuildContext context) {}
@@ -75,15 +81,6 @@ class SignUpPersonalAccModel extends FlutterFlowModel<SignUpPersonalAccWidget> {
 
     suffixTxtFocusNode?.dispose();
     suffixTxtTextController?.dispose();
-
-    provinceTxtFocusNode?.dispose();
-    provinceTxtTextController?.dispose();
-
-    cityTxtFocusNode?.dispose();
-    cityTxtTextController?.dispose();
-
-    barangayTxtFocusNode?.dispose();
-    barangayTxtTextController?.dispose();
 
     fullAddressFocusNode?.dispose();
     fullAddressTextController?.dispose();

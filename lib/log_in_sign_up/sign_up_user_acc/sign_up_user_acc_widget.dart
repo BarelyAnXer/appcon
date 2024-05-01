@@ -1,13 +1,45 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'sign_up_user_acc_model.dart';
 export 'sign_up_user_acc_model.dart';
 
 class SignUpUserAccWidget extends StatefulWidget {
-  const SignUpUserAccWidget({super.key});
+  const SignUpUserAccWidget({
+    super.key,
+    required this.firstname,
+    required this.middlename,
+    required this.lastname,
+    required this.suffix,
+    required this.birthdate,
+    required this.gender,
+    required this.province,
+    required this.city,
+    required this.barangay,
+    required this.fullAddress,
+    required this.occupation,
+    required this.religion,
+    required this.bloodtype,
+  });
+
+  final String? firstname;
+  final String? middlename;
+  final String? lastname;
+  final String? suffix;
+  final DateTime? birthdate;
+  final String? gender;
+  final String? province;
+  final String? city;
+  final String? barangay;
+  final String? fullAddress;
+  final String? occupation;
+  final String? religion;
+  final String? bloodtype;
 
   @override
   State<SignUpUserAccWidget> createState() => _SignUpUserAccWidgetState();
@@ -450,8 +482,56 @@ class _SignUpUserAccWidgetState extends State<SignUpUserAccWidget> {
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('SignUpBtn pressed ...');
+                    onPressed: () async {
+                      _model.province =
+                          await actions.provinceCodeToProvinceName(
+                        widget.province,
+                      );
+                      GoRouter.of(context).prepareAuthEvent();
+                      if (_model.passwordTxtTextController.text !=
+                          _model.confirmPasswordTxtTextController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              'Passwords don\'t match!',
+                            ),
+                          ),
+                        );
+                        return;
+                      }
+
+                      final user = await authManager.createAccountWithEmail(
+                        context,
+                        _model.emailTxtTextController.text,
+                        _model.passwordTxtTextController.text,
+                      );
+                      if (user == null) {
+                        return;
+                      }
+
+                      await UsersRecord.collection
+                          .doc(user.uid)
+                          .update(createUsersRecordData(
+                            firstname: widget.firstname,
+                            middlename: widget.middlename,
+                            lastname: widget.lastname,
+                            suffix: widget.suffix,
+                            email: _model.emailTxtTextController.text,
+                            birthdate: widget.birthdate,
+                            gender: widget.gender,
+                            province: _model.province,
+                            city: widget.city,
+                            barangay: widget.barangay,
+                            fullAddress: widget.fullAddress,
+                            occupation: widget.occupation,
+                            religion: widget.religion,
+                            bloodtype: widget.bloodtype,
+                            usertype: 'EndUser',
+                          ));
+
+                      context.goNamedAuth('HomePagePlus', context.mounted);
+
+                      setState(() {});
                     },
                     text: 'SIGN UP',
                     options: FFButtonOptions(

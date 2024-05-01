@@ -516,7 +516,7 @@ class _MyInformationPageWidgetState extends State<MyInformationPageWidget> {
                                     0.0, 5.0, 0.0, 0.0),
                                 child: AuthUserStreamWidget(
                                   builder: (context) => Text(
-                                    '${valueOrDefault(currentUserDocument?.houseno, '')} ${valueOrDefault(currentUserDocument?.street, '')} ${valueOrDefault(currentUserDocument?.barangay, '')} ${valueOrDefault(currentUserDocument?.municipality, '')} ${valueOrDefault(currentUserDocument?.province, '')} ${valueOrDefault(currentUserDocument?.zipcode, '')}',
+                                    '${valueOrDefault(currentUserDocument?.houseno, '')} ${valueOrDefault(currentUserDocument?.street, '')} ${valueOrDefault(currentUserDocument?.barangay, '')}  ${valueOrDefault(currentUserDocument?.province, '')} ${valueOrDefault(currentUserDocument?.zipcode, '')}',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
@@ -769,7 +769,7 @@ class _MyInformationPageWidgetState extends State<MyInformationPageWidget> {
                           await authManager.signOut();
                           GoRouter.of(context).clearRedirectLocation();
 
-                          context.goNamedAuth('LogInPage', context.mounted);
+                          context.goNamedAuth('LogInPlus', context.mounted);
                         },
                         text: 'Logout',
                         options: FFButtonOptions(

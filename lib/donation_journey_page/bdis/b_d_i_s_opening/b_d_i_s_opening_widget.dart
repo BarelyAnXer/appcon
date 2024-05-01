@@ -255,8 +255,8 @@ class _BDISOpeningWidgetState extends State<BDISOpeningWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                     child: FFButtonWidget(
-                      onPressed: () {
-                        print('btnProceed pressed ...');
+                      onPressed: () async {
+                        context.pushNamed('BDISInterface');
                       },
                       text: 'Proceed',
                       options: FFButtonOptions(

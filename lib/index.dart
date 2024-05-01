@@ -1,13 +1,8 @@
 // Export pages
-export '/log_in_page/log_in_page_widget.dart' show LogInPageWidget;
 export '/onboarding_screen/onboarding_one/onboarding_one_widget.dart'
     show OnboardingOneWidget;
-export '/sign_up_personal/sign_up_personal_widget.dart'
-    show SignUpPersonalWidget;
-export '/sign_up_account/sign_up_account_widget.dart' show SignUpAccountWidget;
-export '/request_page/request_page_widget.dart' show RequestPageWidget;
-export '/donation_journey_page/donation_journey_page_widget.dart'
-    show DonationJourneyPageWidget;
+export '/archives/sign_up_account/sign_up_account_widget.dart'
+    show SignUpAccountWidget;
 export '/profile_page/profile_page_widget.dart' show ProfilePageWidget;
 export '/profile_pages/my_information_page/my_information_page_widget.dart'
     show MyInformationPageWidget;
@@ -40,9 +35,9 @@ export '/donation_journey_page/donation_journey/donation_journey_widget.dart'
     show DonationJourneyWidget;
 export '/homepage/donation_drive/donation_drive_widget.dart'
     show DonationDriveWidget;
-export '/log_in_sign_up/bdis/startof_b_d_i_s/startof_b_d_i_s_widget.dart'
+export '/archives/startof_b_d_i_s/startof_b_d_i_s_widget.dart'
     show StartofBDISWidget;
-export '/log_in_sign_up/bdis/b_d_i_s_interface/b_d_i_s_interface_widget.dart'
+export '/archives/b_d_i_s_interface/b_d_i_s_interface_widget.dart'
     show BDISInterfaceWidget;
 export '/homepage/preparation/preparation_widget.dart' show PreparationWidget;
 export '/homepage/benefits/benefits_widget.dart' show BenefitsWidget;
@@ -56,5 +51,10 @@ export '/donation_journey_page/bdis/b_d_i_s_summary/b_d_i_s_summary_widget.dart'
     show BDISSummaryWidget;
 export '/donation_journey_page/bdis/b_d_i_s_recap/b_d_i_s_recap_widget.dart'
     show BDISRecapWidget;
-export '/scheduled_donation_copy/scheduled_donation_copy_widget.dart'
-    show ScheduledDonationCopyWidget;
+export '/homepage/first_assessment/before_homepage/before_homepage_widget.dart'
+    show BeforeHomepageWidget;
+export '/donation_journey_page/bdis/b_d_i_s_welcome/b_d_i_s_welcome_widget.dart'
+    show BDISWelcomeWidget;
+export '/homepage/first_assessment/question_health_assessment/question_health_assessment_widget.dart'
+    show QuestionHealthAssessmentWidget;
+export '/test/test_widget.dart' show TestWidget;

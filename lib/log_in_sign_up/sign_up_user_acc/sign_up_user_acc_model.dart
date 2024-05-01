@@ -21,6 +21,8 @@ class SignUpUserAccModel extends FlutterFlowModel<SignUpUserAccWidget> {
   late bool confirmPasswordTxtVisibility;
   String? Function(BuildContext, String?)?
       confirmPasswordTxtTextControllerValidator;
+  // Stores action output result for [Custom Action - provinceCodeToProvinceName] action in SignUpBtn widget.
+  String? province;
 
   @override
   void initState(BuildContext context) {

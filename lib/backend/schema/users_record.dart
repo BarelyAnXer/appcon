@@ -95,11 +95,6 @@ class UsersRecord extends FirestoreRecord {
   String get barangay => _barangay ?? '';
   bool hasBarangay() => _barangay != null;
 
-  // "municipality" field.
-  String? _municipality;
-  String get municipality => _municipality ?? '';
-  bool hasMunicipality() => _municipality != null;
-
   // "province" field.
   String? _province;
   String get province => _province ?? '';
@@ -130,6 +125,46 @@ class UsersRecord extends FirestoreRecord {
   String get gender => _gender ?? '';
   bool hasGender() => _gender != null;
 
+  // "is_superadmin" field.
+  bool? _isSuperadmin;
+  bool get isSuperadmin => _isSuperadmin ?? false;
+  bool hasIsSuperadmin() => _isSuperadmin != null;
+
+  // "company_name" field.
+  String? _companyName;
+  String get companyName => _companyName ?? '';
+  bool hasCompanyName() => _companyName != null;
+
+  // "city" field.
+  String? _city;
+  String get city => _city ?? '';
+  bool hasCity() => _city != null;
+
+  // "full_address" field.
+  String? _fullAddress;
+  String get fullAddress => _fullAddress ?? '';
+  bool hasFullAddress() => _fullAddress != null;
+
+  // "religion" field.
+  String? _religion;
+  String get religion => _religion ?? '';
+  bool hasReligion() => _religion != null;
+
+  // "usertype" field.
+  String? _usertype;
+  String get usertype => _usertype ?? '';
+  bool hasUsertype() => _usertype != null;
+
+  // "company_province" field.
+  String? _companyProvince;
+  String get companyProvince => _companyProvince ?? '';
+  bool hasCompanyProvince() => _companyProvince != null;
+
+  // "has_answer_health_assesment" field.
+  bool? _hasAnswerHealthAssesment;
+  bool get hasAnswerHealthAssesment => _hasAnswerHealthAssesment ?? false;
+  bool hasHasAnswerHealthAssesment() => _hasAnswerHealthAssesment != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -147,13 +182,21 @@ class UsersRecord extends FirestoreRecord {
     _nationality = snapshotData['nationality'] as String?;
     _street = snapshotData['street'] as String?;
     _barangay = snapshotData['barangay'] as String?;
-    _municipality = snapshotData['municipality'] as String?;
     _province = snapshotData['province'] as String?;
     _zipcode = snapshotData['zipcode'] as String?;
     _bloodtype = snapshotData['bloodtype'] as String?;
     _level = snapshotData['level'] as String?;
     _houseno = snapshotData['houseno'] as String?;
     _gender = snapshotData['gender'] as String?;
+    _isSuperadmin = snapshotData['is_superadmin'] as bool?;
+    _companyName = snapshotData['company_name'] as String?;
+    _city = snapshotData['city'] as String?;
+    _fullAddress = snapshotData['full_address'] as String?;
+    _religion = snapshotData['religion'] as String?;
+    _usertype = snapshotData['usertype'] as String?;
+    _companyProvince = snapshotData['company_province'] as String?;
+    _hasAnswerHealthAssesment =
+        snapshotData['has_answer_health_assesment'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -206,13 +249,20 @@ Map<String, dynamic> createUsersRecordData({
   String? nationality,
   String? street,
   String? barangay,
-  String? municipality,
   String? province,
   String? zipcode,
   String? bloodtype,
   String? level,
   String? houseno,
   String? gender,
+  bool? isSuperadmin,
+  String? companyName,
+  String? city,
+  String? fullAddress,
+  String? religion,
+  String? usertype,
+  String? companyProvince,
+  bool? hasAnswerHealthAssesment,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -232,13 +282,20 @@ Map<String, dynamic> createUsersRecordData({
       'nationality': nationality,
       'street': street,
       'barangay': barangay,
-      'municipality': municipality,
       'province': province,
       'zipcode': zipcode,
       'bloodtype': bloodtype,
       'level': level,
       'houseno': houseno,
       'gender': gender,
+      'is_superadmin': isSuperadmin,
+      'company_name': companyName,
+      'city': city,
+      'full_address': fullAddress,
+      'religion': religion,
+      'usertype': usertype,
+      'company_province': companyProvince,
+      'has_answer_health_assesment': hasAnswerHealthAssesment,
     }.withoutNulls,
   );
 
@@ -266,13 +323,20 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.nationality == e2?.nationality &&
         e1?.street == e2?.street &&
         e1?.barangay == e2?.barangay &&
-        e1?.municipality == e2?.municipality &&
         e1?.province == e2?.province &&
         e1?.zipcode == e2?.zipcode &&
         e1?.bloodtype == e2?.bloodtype &&
         e1?.level == e2?.level &&
         e1?.houseno == e2?.houseno &&
-        e1?.gender == e2?.gender;
+        e1?.gender == e2?.gender &&
+        e1?.isSuperadmin == e2?.isSuperadmin &&
+        e1?.companyName == e2?.companyName &&
+        e1?.city == e2?.city &&
+        e1?.fullAddress == e2?.fullAddress &&
+        e1?.religion == e2?.religion &&
+        e1?.usertype == e2?.usertype &&
+        e1?.companyProvince == e2?.companyProvince &&
+        e1?.hasAnswerHealthAssesment == e2?.hasAnswerHealthAssesment;
   }
 
   @override
@@ -293,13 +357,20 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.nationality,
         e?.street,
         e?.barangay,
-        e?.municipality,
         e?.province,
         e?.zipcode,
         e?.bloodtype,
         e?.level,
         e?.houseno,
-        e?.gender
+        e?.gender,
+        e?.isSuperadmin,
+        e?.companyName,
+        e?.city,
+        e?.fullAddress,
+        e?.religion,
+        e?.usertype,
+        e?.companyProvince,
+        e?.hasAnswerHealthAssesment
       ]);
 
   @override

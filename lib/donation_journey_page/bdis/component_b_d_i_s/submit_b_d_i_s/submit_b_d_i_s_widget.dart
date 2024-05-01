@@ -84,82 +84,96 @@ class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 8.0, 0.0, 0.0),
-                            child: Text(
-                              'Kindly note that once you\'ve submitted, you won\'t be able to edit the interview or cancel your donation schedule.',
-                              textAlign: TextAlign.justify,
-                              style: FlutterFlowTheme.of(context)
-                                  .labelLarge
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 20.0,
-                                    letterSpacing: 0.0,
-                                  ),
+                          Align(
+                            alignment: const AlignmentDirectional(0.0, -1.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 8.0, 0.0, 0.0),
+                              child: Text(
+                                'Are you sure with you want to submit? ',
+                                textAlign: TextAlign.center,
+                                style: FlutterFlowTheme.of(context)
+                                    .labelLarge
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: const Color(0xFF333333),
+                                      fontSize: 35.0,
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 12.0),
+                                0.0, 20.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 16.0, 0.0),
+                                      0.0, 0.0, 25.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () {
                                       print('Button pressed ...');
                                     },
                                     text: 'Cancel',
                                     options: FFButtonOptions(
-                                      padding: const EdgeInsets.all(24.0),
+                                      width: 150.0,
+                                      height: 50.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
                                           const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: const Color(0xFFF3F1F1),
                                       textStyle: FlutterFlowTheme.of(context)
-                                          .labelLarge
+                                          .titleSmall
                                           .override(
                                             fontFamily: 'Poppins',
-                                            color: const Color(0xFF333333),
+                                            color: const Color(0xFF959494),
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
                                           ),
-                                      elevation: 0.0,
+                                      elevation: 1.0,
                                       borderSide: const BorderSide(
                                         color: Color(0xFFBFBDBD),
-                                        width: 2.0,
+                                        width: 1.0,
                                       ),
-                                      borderRadius: BorderRadius.circular(5.0),
+                                      borderRadius: BorderRadius.circular(2.0),
                                     ),
                                   ),
                                 ),
-                                FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
-                                  },
-                                  text: 'Submit',
-                                  options: FFButtonOptions(
-                                    padding: const EdgeInsets.all(24.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: const Color(0xFF0163DA),
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                        ),
-                                    elevation: 1.0,
-                                    borderSide: const BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 5.0, 0.0),
+                                  child: FFButtonWidget(
+                                    onPressed: () {
+                                      print('Button pressed ...');
+                                    },
+                                    text: 'Submit',
+                                    options: FFButtonOptions(
+                                      width: 150.0,
+                                      height: 50.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          24.0, 0.0, 24.0, 0.0),
+                                      iconPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              0.0, 0.0, 0.0, 0.0),
+                                      color: const Color(0xFF0163DA),
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: Colors.white,
+                                            letterSpacing: 0.0,
+                                          ),
+                                      elevation: 2.0,
+                                      borderSide: const BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(2.0),
                                     ),
-                                    borderRadius: BorderRadius.circular(5.0),
                                   ),
                                 ),
                               ],

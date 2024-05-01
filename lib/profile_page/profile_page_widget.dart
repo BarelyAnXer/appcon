@@ -344,7 +344,7 @@ class _ProfilePageWidgetState extends State<ProfilePageWidget> {
                     await authManager.signOut();
                     GoRouter.of(context).clearRedirectLocation();
 
-                    context.goNamedAuth('LogInPage', context.mounted);
+                    context.goNamedAuth('LogInPlus', context.mounted);
                   },
                   text: 'Logout',
                   options: FFButtonOptions(
