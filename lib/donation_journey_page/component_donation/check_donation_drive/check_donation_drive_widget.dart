@@ -1,5 +1,5 @@
-import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/donation_journey_page/component_donation/donation_sureness/donation_sureness_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -14,10 +14,10 @@ export 'check_donation_drive_model.dart';
 class CheckDonationDriveWidget extends StatefulWidget {
   const CheckDonationDriveWidget({
     super.key,
-    required this.bloodDriveReference,
+    required this.blooddriveid,
   });
 
-  final DocumentReference? bloodDriveReference;
+  final DocumentReference? blooddriveid;
 
   @override
   State<CheckDonationDriveWidget> createState() =>
@@ -92,7 +92,7 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
         sigmaY: 4.0,
       ),
       child: StreamBuilder<BloodDriveRecord>(
-        stream: BloodDriveRecord.getDocument(widget.bloodDriveReference!),
+        stream: BloodDriveRecord.getDocument(widget.blooddriveid!),
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -323,27 +323,23 @@ class _CheckDonationDriveWidgetState extends State<CheckDonationDriveWidget>
                                             0.0, 0.0, 4.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            await BloodStocksRecord.collection
-                                                .doc()
-                                                .set(
-                                                    createBloodStocksRecordData(
-                                                  donationtype: 'BloodDrive',
-                                                  blooddonorid:
-                                                      currentUserReference,
-                                                  appointmentdate:
-                                                      containerBloodDriveRecord
-                                                          .donationdriveDate,
-                                                  bloodcenter:
-                                                      containerBloodDriveRecord
-                                                          .bloodcenter,
-                                                  blooddrivevid: widget
-                                                      .bloodDriveReference,
-                                                  createdTime:
-                                                      getCurrentTimestamp,
-                                                ));
-
-                                            context
-                                                .pushNamed('DonationJourney');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.viewInsetsOf(
+                                                          context),
+                                                  child:
+                                                      const DonationSurenessWidget(),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
                                           },
                                           text: 'Donate',
                                           options: FFButtonOptions(

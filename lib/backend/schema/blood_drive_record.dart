@@ -82,16 +82,6 @@ class BloodDriveRecord extends FirestoreRecord {
   String get archivedBy => _archivedBy ?? '';
   bool hasArchivedBy() => _archivedBy != null;
 
-  // "blooddrive_image" field.
-  String? _blooddriveImage;
-  String get blooddriveImage => _blooddriveImage ?? '';
-  bool hasBlooddriveImage() => _blooddriveImage != null;
-
-  // "bloodrive_id" field.
-  String? _bloodriveId;
-  String get bloodriveId => _bloodriveId ?? '';
-  bool hasBloodriveId() => _bloodriveId != null;
-
   void _initializeFields() {
     _bloodcenter = snapshotData['bloodcenter'] as String?;
     _blooddriveBarangay = snapshotData['blooddrive_barangay'] as String?;
@@ -108,8 +98,6 @@ class BloodDriveRecord extends FirestoreRecord {
     _editedBy = snapshotData['edited_by'] as String?;
     _isArchived = snapshotData['is_archived'] as bool?;
     _archivedBy = snapshotData['archived_by'] as String?;
-    _blooddriveImage = snapshotData['blooddrive_image'] as String?;
-    _bloodriveId = snapshotData['bloodrive_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -160,8 +148,6 @@ Map<String, dynamic> createBloodDriveRecordData({
   String? editedBy,
   bool? isArchived,
   String? archivedBy,
-  String? blooddriveImage,
-  String? bloodriveId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -178,8 +164,6 @@ Map<String, dynamic> createBloodDriveRecordData({
       'edited_by': editedBy,
       'is_archived': isArchived,
       'archived_by': archivedBy,
-      'blooddrive_image': blooddriveImage,
-      'bloodrive_id': bloodriveId,
     }.withoutNulls,
   );
 
@@ -204,9 +188,7 @@ class BloodDriveRecordDocumentEquality implements Equality<BloodDriveRecord> {
         e1?.donationdriveDate == e2?.donationdriveDate &&
         e1?.editedBy == e2?.editedBy &&
         e1?.isArchived == e2?.isArchived &&
-        e1?.archivedBy == e2?.archivedBy &&
-        e1?.blooddriveImage == e2?.blooddriveImage &&
-        e1?.bloodriveId == e2?.bloodriveId;
+        e1?.archivedBy == e2?.archivedBy;
   }
 
   @override
@@ -223,9 +205,7 @@ class BloodDriveRecordDocumentEquality implements Equality<BloodDriveRecord> {
         e?.donationdriveDate,
         e?.editedBy,
         e?.isArchived,
-        e?.archivedBy,
-        e?.blooddriveImage,
-        e?.bloodriveId
+        e?.archivedBy
       ]);
 
   @override

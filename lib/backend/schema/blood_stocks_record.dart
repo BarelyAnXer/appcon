@@ -106,11 +106,6 @@ class BloodStocksRecord extends FirestoreRecord {
   DocumentReference? get blooddonorid => _blooddonorid;
   bool hasBlooddonorid() => _blooddonorid != null;
 
-  // "blooddrivevid" field.
-  DocumentReference? _blooddrivevid;
-  DocumentReference? get blooddrivevid => _blooddrivevid;
-  bool hasBlooddrivevid() => _blooddrivevid != null;
-
   void _initializeFields() {
     _id = castToType<int>(snapshotData['Id']);
     _bloodtype = snapshotData['bloodtype'] as String?;
@@ -131,7 +126,6 @@ class BloodStocksRecord extends FirestoreRecord {
     _bloodcenterUserid =
         snapshotData['bloodcenter_userid'] as DocumentReference?;
     _blooddonorid = snapshotData['blooddonorid'] as DocumentReference?;
-    _blooddrivevid = snapshotData['blooddrivevid'] as DocumentReference?;
   }
 
   static CollectionReference get collection =>
@@ -187,7 +181,6 @@ Map<String, dynamic> createBloodStocksRecordData({
   String? bdisStatus,
   DocumentReference? bloodcenterUserid,
   DocumentReference? blooddonorid,
-  DocumentReference? blooddrivevid,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -209,7 +202,6 @@ Map<String, dynamic> createBloodStocksRecordData({
       'bdis_status': bdisStatus,
       'bloodcenter_userid': bloodcenterUserid,
       'blooddonorid': blooddonorid,
-      'blooddrivevid': blooddrivevid,
     }.withoutNulls,
   );
 
@@ -238,8 +230,7 @@ class BloodStocksRecordDocumentEquality implements Equality<BloodStocksRecord> {
         e1?.status == e2?.status &&
         e1?.bdisStatus == e2?.bdisStatus &&
         e1?.bloodcenterUserid == e2?.bloodcenterUserid &&
-        e1?.blooddonorid == e2?.blooddonorid &&
-        e1?.blooddrivevid == e2?.blooddrivevid;
+        e1?.blooddonorid == e2?.blooddonorid;
   }
 
   @override
@@ -261,8 +252,7 @@ class BloodStocksRecordDocumentEquality implements Equality<BloodStocksRecord> {
         e?.status,
         e?.bdisStatus,
         e?.bloodcenterUserid,
-        e?.blooddonorid,
-        e?.blooddrivevid
+        e?.blooddonorid
       ]);
 
   @override

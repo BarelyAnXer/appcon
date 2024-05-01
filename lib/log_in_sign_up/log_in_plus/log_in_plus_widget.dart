@@ -1,6 +1,8 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'log_in_plus_model.dart';
@@ -23,11 +25,11 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
     super.initState();
     _model = createModel(context, () => LogInPlusModel());
 
-    _model.emailTxtTextController1 ??= TextEditingController();
-    _model.emailTxtFocusNode1 ??= FocusNode();
+    _model.emailTxtTextController ??= TextEditingController();
+    _model.emailTxtFocusNode ??= FocusNode();
 
-    _model.emailTxtTextController2 ??= TextEditingController();
-    _model.emailTxtFocusNode2 ??= FocusNode();
+    _model.passwordTxtTextController ??= TextEditingController();
+    _model.passwordTxtFocusNode ??= FocusNode();
   }
 
   @override
@@ -106,8 +108,8 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 35.0, 20.0, 0.0),
                   child: TextFormField(
-                    controller: _model.emailTxtTextController1,
-                    focusNode: _model.emailTxtFocusNode1,
+                    controller: _model.emailTxtTextController,
+                    focusNode: _model.emailTxtFocusNode,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -161,7 +163,7 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w300,
                         ),
-                    validator: _model.emailTxtTextController1Validator
+                    validator: _model.emailTxtTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
@@ -169,10 +171,10 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 20.0, 0.0),
                   child: TextFormField(
-                    controller: _model.emailTxtTextController2,
-                    focusNode: _model.emailTxtFocusNode2,
+                    controller: _model.passwordTxtTextController,
+                    focusNode: _model.passwordTxtFocusNode,
                     autofocus: true,
-                    obscureText: !_model.emailTxtVisibility,
+                    obscureText: !_model.passwordTxtVisibility,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       labelStyle:
@@ -220,12 +222,12 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                       ),
                       suffixIcon: InkWell(
                         onTap: () => setState(
-                          () => _model.emailTxtVisibility =
-                              !_model.emailTxtVisibility,
+                          () => _model.passwordTxtVisibility =
+                              !_model.passwordTxtVisibility,
                         ),
                         focusNode: FocusNode(skipTraversal: true),
                         child: Icon(
-                          _model.emailTxtVisibility
+                          _model.passwordTxtVisibility
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
                           color: const Color(0xFF333333),
@@ -238,7 +240,7 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w300,
                         ),
-                    validator: _model.emailTxtTextController2Validator
+                    validator: _model.passwordTxtTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
@@ -264,8 +266,19 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 30.0, 20.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('SignInBtn pressed ...');
+                    onPressed: () async {
+                      GoRouter.of(context).prepareAuthEvent();
+
+                      final user = await authManager.signInWithEmail(
+                        context,
+                        _model.emailTxtTextController.text,
+                        _model.passwordTxtTextController.text,
+                      );
+                      if (user == null) {
+                        return;
+                      }
+
+                      context.goNamedAuth('HomePagePlus', context.mounted);
                     },
                     text: 'SIGN IN',
                     options: FFButtonOptions(
@@ -315,6 +328,11 @@ class _LogInPlusWidgetState extends State<LogInPlusWidget> {
                             fontWeight: FontWeight.w600,
                             decoration: TextDecoration.underline,
                           ),
+                          mouseCursor: SystemMouseCursors.click,
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () async {
+                              context.pushNamed('SignUpPersonalAcc');
+                            },
                         )
                       ],
                       style: FlutterFlowTheme.of(context).bodyMedium.override(

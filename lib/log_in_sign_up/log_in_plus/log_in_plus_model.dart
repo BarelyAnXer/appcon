@@ -7,27 +7,27 @@ class LogInPlusModel extends FlutterFlowModel<LogInPlusWidget> {
 
   final unfocusNode = FocusNode();
   // State field(s) for emailTxt widget.
-  FocusNode? emailTxtFocusNode1;
-  TextEditingController? emailTxtTextController1;
-  String? Function(BuildContext, String?)? emailTxtTextController1Validator;
-  // State field(s) for emailTxt widget.
-  FocusNode? emailTxtFocusNode2;
-  TextEditingController? emailTxtTextController2;
-  late bool emailTxtVisibility;
-  String? Function(BuildContext, String?)? emailTxtTextController2Validator;
+  FocusNode? emailTxtFocusNode;
+  TextEditingController? emailTxtTextController;
+  String? Function(BuildContext, String?)? emailTxtTextControllerValidator;
+  // State field(s) for passwordTxt widget.
+  FocusNode? passwordTxtFocusNode;
+  TextEditingController? passwordTxtTextController;
+  late bool passwordTxtVisibility;
+  String? Function(BuildContext, String?)? passwordTxtTextControllerValidator;
 
   @override
   void initState(BuildContext context) {
-    emailTxtVisibility = false;
+    passwordTxtVisibility = false;
   }
 
   @override
   void dispose() {
     unfocusNode.dispose();
-    emailTxtFocusNode1?.dispose();
-    emailTxtTextController1?.dispose();
+    emailTxtFocusNode?.dispose();
+    emailTxtTextController?.dispose();
 
-    emailTxtFocusNode2?.dispose();
-    emailTxtTextController2?.dispose();
+    passwordTxtFocusNode?.dispose();
+    passwordTxtTextController?.dispose();
   }
 }

@@ -73,28 +73,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const NavBarPage() : const LogInPageWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const LogInPlusWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const NavBarPage() : const LogInPageWidget(),
-        ),
-        FFRoute(
-          name: 'LogInPage',
-          path: '/logInPage',
-          builder: (context, params) => const LogInPageWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const LogInPlusWidget(),
         ),
         FFRoute(
           name: 'OnboardingOne',
           path: '/onboardingOne',
           builder: (context, params) => const OnboardingOneWidget(),
-        ),
-        FFRoute(
-          name: 'SignUpPersonal',
-          path: '/signUpPersonal',
-          builder: (context, params) => const SignUpPersonalWidget(),
         ),
         FFRoute(
           name: 'SignUpAccount',
@@ -175,20 +165,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'RequestPage',
-          path: '/requestPage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'RequestPage')
-              : const RequestPageWidget(),
-        ),
-        FFRoute(
-          name: 'DonationJourneyPage',
-          path: '/donationJourneyPage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'DonationJourneyPage')
-              : const DonationJourneyPageWidget(),
-        ),
-        FFRoute(
           name: 'ProfilePage',
           path: '/profilePage',
           builder: (context, params) => params.isEmpty
@@ -253,7 +229,60 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'SignUpUserAcc',
           path: '/signUpUserAcc',
-          builder: (context, params) => const SignUpUserAccWidget(),
+          builder: (context, params) => SignUpUserAccWidget(
+            firstname: params.getParam(
+              'firstname',
+              ParamType.String,
+            ),
+            middlename: params.getParam(
+              'middlename',
+              ParamType.String,
+            ),
+            lastname: params.getParam(
+              'lastname',
+              ParamType.String,
+            ),
+            suffix: params.getParam(
+              'suffix',
+              ParamType.String,
+            ),
+            birthdate: params.getParam(
+              'birthdate',
+              ParamType.DateTime,
+            ),
+            gender: params.getParam(
+              'gender',
+              ParamType.String,
+            ),
+            province: params.getParam(
+              'province',
+              ParamType.String,
+            ),
+            city: params.getParam(
+              'city',
+              ParamType.String,
+            ),
+            barangay: params.getParam(
+              'barangay',
+              ParamType.String,
+            ),
+            fullAddress: params.getParam(
+              'fullAddress',
+              ParamType.String,
+            ),
+            occupation: params.getParam(
+              'occupation',
+              ParamType.String,
+            ),
+            religion: params.getParam(
+              'religion',
+              ParamType.String,
+            ),
+            bloodtype: params.getParam(
+              'bloodtype',
+              ParamType.String,
+            ),
+          ),
         ),
         FFRoute(
           name: 'SetUpProfile',
@@ -270,7 +299,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'DonationJourney',
           path: '/donationJourney',
-          builder: (context, params) => const DonationJourneyWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'DonationJourney')
+              : const DonationJourneyWidget(),
         ),
         FFRoute(
           name: 'DonationDrive',
@@ -280,9 +311,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'StartofBDIS',
           path: '/startofBDIS',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'StartofBDIS')
-              : const StartofBDISWidget(),
+          builder: (context, params) => const StartofBDISWidget(),
         ),
         FFRoute(
           name: 'BDISInterface',
@@ -307,19 +336,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'BDISOpening',
           path: '/bDISOpening',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'BDISOpening')
-              : const BDISOpeningWidget(),
+          builder: (context, params) => const BDISOpeningWidget(),
         ),
         FFRoute(
           name: 'BDISAnswerSheet',
           path: '/bDISAnswerSheet',
           builder: (context, params) => const BDISAnswerSheetWidget(),
-        ),
-        FFRoute(
-          name: 'NewBDIS',
-          path: '/newBDIS',
-          builder: (context, params) => const NewBDISWidget(),
         ),
         FFRoute(
           name: 'BDISSummary',
@@ -332,9 +354,25 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const BDISRecapWidget(),
         ),
         FFRoute(
-          name: 'ScheduledDonationCopy',
-          path: '/scheduledDonationCopy',
-          builder: (context, params) => const ScheduledDonationCopyWidget(),
+          name: 'BeforeHomepage',
+          path: '/beforeHomepage',
+          builder: (context, params) => const BeforeHomepageWidget(),
+        ),
+        FFRoute(
+          name: 'BDISWelcome',
+          path: '/bDISWelcome',
+          builder: (context, params) => const BDISWelcomeWidget(),
+        ),
+        FFRoute(
+          name: 'QuestionHealthAssessment',
+          path: '/questionHealthAssessment',
+          builder: (context, params) => const QuestionHealthAssessmentWidget(),
+        ),
+        FFRoute(
+          name: 'test',
+          path: '/test',
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'test') : const TestWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -430,7 +468,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -451,10 +489,10 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
-  ]) {
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -505,7 +543,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/logInPage';
+            return '/logInPlus';
           }
           return null;
         },

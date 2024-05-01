@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_radio_button.dart';
@@ -38,15 +39,6 @@ class _SignUpPersonalAccWidgetState extends State<SignUpPersonalAccWidget> {
 
     _model.suffixTxtTextController ??= TextEditingController();
     _model.suffixTxtFocusNode ??= FocusNode();
-
-    _model.provinceTxtTextController ??= TextEditingController();
-    _model.provinceTxtFocusNode ??= FocusNode();
-
-    _model.cityTxtTextController ??= TextEditingController();
-    _model.cityTxtFocusNode ??= FocusNode();
-
-    _model.barangayTxtTextController ??= TextEditingController();
-    _model.barangayTxtFocusNode ??= FocusNode();
 
     _model.fullAddressTextController ??= TextEditingController();
     _model.fullAddressFocusNode ??= FocusNode();
@@ -638,212 +630,213 @@ class _SignUpPersonalAccWidgetState extends State<SignUpPersonalAccWidget> {
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 20.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 1.0, 0.0),
-                              child: TextFormField(
-                                controller: _model.provinceTxtTextController,
-                                focusNode: _model.provinceTxtFocusNode,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Province',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00E0E3E7),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
+                      child: FutureBuilder<ApiCallResponse>(
+                        future: GetProvincesCall.call(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50.0,
+                                height: 50.0,
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    FlutterFlowTheme.of(context).primary,
                                   ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFF0163DA),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 13.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                validator: _model
-                                    .provinceTxtTextControllerValidator
-                                    .asValidator(context),
                               ),
+                            );
+                          }
+                          final dropDownProvinceGetProvincesResponse =
+                              snapshot.data!;
+                          return FlutterFlowDropDown<String>(
+                            controller:
+                                _model.dropDownProvinceValueController ??=
+                                    FormFieldController<String>(
+                              _model.dropDownProvinceValue ??= '',
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  1.0, 0.0, 1.0, 0.0),
-                              child: TextFormField(
-                                controller: _model.cityTxtTextController,
-                                focusNode: _model.cityTxtFocusNode,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'City',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00E0E3E7),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFF0163DA),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
+                            options: List<String>.from(GetProvincesCall.code(
+                              dropDownProvinceGetProvincesResponse.jsonBody,
+                            )!),
+                            optionLabels: GetProvincesCall.name(
+                              dropDownProvinceGetProvincesResponse.jsonBody,
+                            )!,
+                            onChanged: (val) async {
+                              setState(
+                                  () => _model.dropDownProvinceValue = val);
+                              _model.selectedProvince = null;
+                              _model.selectedCity = null;
+                              setState(() {
+                                _model.selectedProvince =
+                                    _model.dropDownProvinceValue;
+                              });
+                            },
+                            width: double.infinity,
+                            height: 56.0,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  letterSpacing: 0.0,
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 13.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                validator: _model.cityTxtTextControllerValidator
-                                    .asValidator(context),
-                              ),
+                            hintText: 'Province',
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 24.0,
                             ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  1.0, 0.0, 1.0, 0.0),
-                              child: TextFormField(
-                                controller: _model.barangayTxtTextController,
-                                focusNode: _model.barangayTxtFocusNode,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Barangay',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        letterSpacing: 0.0,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0x00E0E3E7),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: const BorderSide(
-                                      color: Color(0xFF0163DA),
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: FlutterFlowTheme.of(context).error,
-                                      width: 2.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  filled: true,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 13.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                validator: _model
-                                    .barangayTxtTextControllerValidator
-                                    .asValidator(context),
-                              ),
-                            ),
-                          ),
-                        ],
+                            fillColor: const Color(0xFFF5F5F5),
+                            elevation: 2.0,
+                            borderColor: const Color(0x00E0E3E7),
+                            borderWidth: 2.0,
+                            borderRadius: 8.0,
+                            margin: const EdgeInsetsDirectional.fromSTEB(
+                                16.0, 4.0, 16.0, 4.0),
+                            hidesUnderline: true,
+                            isOverButton: true,
+                            isSearchable: false,
+                            isMultiSelect: false,
+                          );
+                        },
                       ),
                     ),
+                    if (_model.dropDownProvinceValue != null &&
+                        _model.dropDownProvinceValue != '')
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            20.0, 15.0, 20.0, 0.0),
+                        child: FutureBuilder<ApiCallResponse>(
+                          future: GetCitiesMunicipaCall.call(
+                            provincecode: _model.selectedProvince,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            final dropDownCityGetCitiesMunicipaResponse =
+                                snapshot.data!;
+                            return FlutterFlowDropDown<String>(
+                              controller: _model.dropDownCityValueController ??=
+                                  FormFieldController<String>(
+                                _model.dropDownCityValue ??= '',
+                              ),
+                              options:
+                                  List<String>.from(GetCitiesMunicipaCall.code(
+                                dropDownCityGetCitiesMunicipaResponse.jsonBody,
+                              )!),
+                              optionLabels: GetCitiesMunicipaCall.name(
+                                dropDownCityGetCitiesMunicipaResponse.jsonBody,
+                              )!,
+                              onChanged: (val) async {
+                                setState(() => _model.dropDownCityValue = val);
+                                _model.selectedCity = _model.dropDownCityValue;
+                              },
+                              width: double.infinity,
+                              height: 56.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintText: 'City',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: const Color(0xFFF5F5F5),
+                              elevation: 2.0,
+                              borderColor: const Color(0x00E0E3E7),
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 4.0, 16.0, 4.0),
+                              hidesUnderline: true,
+                              isOverButton: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            );
+                          },
+                        ),
+                      ),
+                    if (_model.selectedCity != null &&
+                        _model.selectedCity != '')
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            20.0, 15.0, 20.0, 0.0),
+                        child: FutureBuilder<ApiCallResponse>(
+                          future: GetBarangaysCall.call(
+                            citycode: _model.selectedCity,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50.0,
+                                  height: 50.0,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                            final dropDownBarangayGetBarangaysResponse =
+                                snapshot.data!;
+                            return FlutterFlowDropDown<String>(
+                              controller:
+                                  _model.dropDownBarangayValueController ??=
+                                      FormFieldController<String>(null),
+                              options: GetBarangaysCall.name(
+                                dropDownBarangayGetBarangaysResponse.jsonBody,
+                              )!,
+                              onChanged: (val) => setState(
+                                  () => _model.dropDownBarangayValue = val),
+                              width: double.infinity,
+                              height: 56.0,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    letterSpacing: 0.0,
+                                  ),
+                              hintText: 'Barangay',
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 24.0,
+                              ),
+                              fillColor: const Color(0xFFF5F5F5),
+                              elevation: 2.0,
+                              borderColor: const Color(0x00E0E3E7),
+                              borderWidth: 2.0,
+                              borderRadius: 8.0,
+                              margin: const EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 4.0, 16.0, 4.0),
+                              hidesUnderline: true,
+                              isOverButton: true,
+                              isSearchable: false,
+                              isMultiSelect: false,
+                            );
+                          },
+                        ),
+                      ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 20.0, 0.0),
@@ -1080,14 +1073,105 @@ class _SignUpPersonalAccWidgetState extends State<SignUpPersonalAccWidget> {
                             .asValidator(context),
                       ),
                     ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 15.0, 20.0, 0.0),
+                      child: FlutterFlowDropDown<String>(
+                        controller: _model.dropDownBloodTypeValueController ??=
+                            FormFieldController<String>(null),
+                        options: const ['Option 1'],
+                        onChanged: (val) =>
+                            setState(() => _model.dropDownBloodTypeValue = val),
+                        width: double.infinity,
+                        height: 56.0,
+                        textStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.override(
+                                  fontFamily: 'Poppins',
+                                  letterSpacing: 0.0,
+                                ),
+                        hintText: 'Blood Type',
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          size: 24.0,
+                        ),
+                        fillColor: const Color(0xFFF5F5F5),
+                        elevation: 2.0,
+                        borderColor: const Color(0x00E0E3E7),
+                        borderWidth: 2.0,
+                        borderRadius: 8.0,
+                        margin: const EdgeInsetsDirectional.fromSTEB(
+                            16.0, 4.0, 16.0, 4.0),
+                        hidesUnderline: true,
+                        isOverButton: true,
+                        isSearchable: false,
+                        isMultiSelect: false,
+                      ),
+                    ),
                   ],
                 ),
                 Padding(
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('NextBtn pressed ...');
+                    onPressed: () async {
+                      context.pushNamed(
+                        'SignUpUserAcc',
+                        queryParameters: {
+                          'firstname': serializeParam(
+                            _model.firstNameTxtTextController.text,
+                            ParamType.String,
+                          ),
+                          'middlename': serializeParam(
+                            _model.middleNameTxtTextController.text,
+                            ParamType.String,
+                          ),
+                          'lastname': serializeParam(
+                            _model.lastNameTxtTextController.text,
+                            ParamType.String,
+                          ),
+                          'suffix': serializeParam(
+                            _model.suffixTxtTextController.text,
+                            ParamType.String,
+                          ),
+                          'birthdate': serializeParam(
+                            _model.datePicked,
+                            ParamType.DateTime,
+                          ),
+                          'gender': serializeParam(
+                            _model.genderBtnValue,
+                            ParamType.String,
+                          ),
+                          'province': serializeParam(
+                            _model.dropDownProvinceValue,
+                            ParamType.String,
+                          ),
+                          'city': serializeParam(
+                            _model.dropDownCityValue,
+                            ParamType.String,
+                          ),
+                          'barangay': serializeParam(
+                            _model.dropDownBarangayValue,
+                            ParamType.String,
+                          ),
+                          'fullAddress': serializeParam(
+                            _model.fullAddressTextController.text,
+                            ParamType.String,
+                          ),
+                          'occupation': serializeParam(
+                            _model.occupationTxtTextController.text,
+                            ParamType.String,
+                          ),
+                          'religion': serializeParam(
+                            _model.religionTxtTextController.text,
+                            ParamType.String,
+                          ),
+                          'bloodtype': serializeParam(
+                            _model.dropDownBloodTypeValue,
+                            ParamType.String,
+                          ),
+                        }.withoutNulls,
+                      );
                     },
                     text: 'NEXT',
                     options: FFButtonOptions(
@@ -1110,6 +1194,16 @@ class _SignUpPersonalAccWidgetState extends State<SignUpPersonalAccWidget> {
                         width: 1.0,
                       ),
                       borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+                Opacity(
+                  opacity: 0.0,
+                  child: Container(
+                    width: 100.0,
+                    height: 30.0,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
                     ),
                   ),
                 ),

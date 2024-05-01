@@ -9,11 +9,16 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 Future<String?> getBloodCenter(String? stringID) async {
-  // Add your function code here!
-  QuerySnapshot querySnapshot =
-      await FirebaseFirestore.instance.collection('users').get();
-  Map<String, dynamic> userData =
-      querySnapshot.docs.first.data() as Map<String, dynamic>;
+  print(
+      "Provided stringID: $stringID"); // Debug print to check the provided stringID
+  DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .doc(stringID) // Retrieve document directly using the provided stringID
+      .get();
+  if (!docSnapshot.exists) {
+    return "DEBUG"; // Return null if no document matches the provided ID
+  }
+  Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
   String companyName = userData['company_name'];
   print(companyName);
   return companyName;

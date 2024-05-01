@@ -38,8 +38,8 @@ class _EditAddressWidgetState extends State<EditAddressWidget> {
         text: valueOrDefault(currentUserDocument?.barangay, ''));
     _model.baranggayTxtFocusNode ??= FocusNode();
 
-    _model.municapilityTxtTextController ??= TextEditingController(
-        text: valueOrDefault(currentUserDocument?.municipality, ''));
+    _model.municapilityTxtTextController ??=
+        TextEditingController(text: 'BALIWAG');
     _model.municapilityTxtFocusNode ??= FocusNode();
 
     _model.provinceTxtTextController ??= TextEditingController(
@@ -344,76 +344,70 @@ class _EditAddressWidgetState extends State<EditAddressWidget> {
                     child: Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(5.0, 10.0, 10.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => TextFormField(
-                          controller: _model.municapilityTxtTextController,
-                          focusNode: _model.municapilityTxtFocusNode,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            '_model.municapilityTxtTextController',
-                            const Duration(milliseconds: 200),
-                            () => setState(() {}),
-                          ),
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Municaplity',
-                            labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Google Sans',
-                                  color: const Color(0xFF0062D9),
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: false,
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'Roboto',
-                                  letterSpacing: 0.0,
-                                ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFF79ACE9),
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                color: Color(0xFF0062D9),
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 0.5,
-                              ),
-                              borderRadius: BorderRadius.circular(15.0),
-                            ),
-                            filled: true,
-                            fillColor: const Color(0xFFF0F6FD),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                      child: TextFormField(
+                        controller: _model.municapilityTxtTextController,
+                        focusNode: _model.municapilityTxtFocusNode,
+                        onChanged: (_) => EasyDebounce.debounce(
+                          '_model.municapilityTxtTextController',
+                          const Duration(milliseconds: 200),
+                          () => setState(() {}),
+                        ),
+                        autofocus: true,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          labelText: 'Municaplity',
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
                                     fontFamily: 'Google Sans',
                                     color: const Color(0xFF0062D9),
                                     letterSpacing: 0.0,
-                                    fontWeight: FontWeight.w500,
                                     useGoogleFonts: false,
                                   ),
-                          validator: _model
-                              .municapilityTxtTextControllerValidator
-                              .asValidator(context),
+                          hintStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    fontFamily: 'Roboto',
+                                    letterSpacing: 0.0,
+                                  ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF79ACE9),
+                              width: 0.5,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Color(0xFF0062D9),
+                              width: 0.5,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 0.5,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: FlutterFlowTheme.of(context).error,
+                              width: 0.5,
+                            ),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          filled: true,
+                          fillColor: const Color(0xFFF0F6FD),
                         ),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Google Sans',
+                              color: const Color(0xFF0062D9),
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: false,
+                            ),
+                        validator: _model.municapilityTxtTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ),
@@ -585,7 +579,6 @@ class _EditAddressWidgetState extends State<EditAddressWidget> {
                       await currentUserReference!.update(createUsersRecordData(
                         street: _model.steetTxtTextController.text,
                         barangay: _model.baranggayTxtTextController.text,
-                        municipality: _model.municapilityTxtTextController.text,
                         province: _model.provinceTxtTextController.text,
                         zipcode: _model.zipCodeTxtTextController.text,
                         houseno: _model.houseNumberTxtTextController.text,

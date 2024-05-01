@@ -3,18 +3,18 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'submit_b_d_i_s_model.dart';
-export 'submit_b_d_i_s_model.dart';
+import 'cancel_donate_model.dart';
+export 'cancel_donate_model.dart';
 
-class SubmitBDISWidget extends StatefulWidget {
-  const SubmitBDISWidget({super.key});
+class CancelDonateWidget extends StatefulWidget {
+  const CancelDonateWidget({super.key});
 
   @override
-  State<SubmitBDISWidget> createState() => _SubmitBDISWidgetState();
+  State<CancelDonateWidget> createState() => _CancelDonateWidgetState();
 }
 
-class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
-  late SubmitBDISModel _model;
+class _CancelDonateWidgetState extends State<CancelDonateWidget> {
+  late CancelDonateModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -25,7 +25,7 @@ class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => SubmitBDISModel());
+    _model = createModel(context, () => CancelDonateModel());
   }
 
   @override
@@ -84,20 +84,32 @@ class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Text(
+                            'Cancel Donation',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: const Color(0xFFFF4342),
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
                           Align(
                             alignment: const AlignmentDirectional(0.0, -1.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 8.0, 0.0, 0.0),
                               child: Text(
-                                'Are you sure with you want to submit? ',
-                                textAlign: TextAlign.center,
+                                'Are you sure you want to cancel this donation? Cancelling means you\'ll need to set a new appointment or register for a blood donation drive again.',
+                                textAlign: TextAlign.justify,
                                 style: FlutterFlowTheme.of(context)
                                     .labelLarge
                                     .override(
                                       fontFamily: 'Poppins',
                                       color: const Color(0xFF333333),
-                                      fontSize: 35.0,
+                                      fontSize: 15.0,
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -117,7 +129,7 @@ class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
                                     onPressed: () {
                                       print('Button pressed ...');
                                     },
-                                    text: 'Cancel',
+                                    text: 'Back',
                                     options: FFButtonOptions(
                                       width: 150.0,
                                       height: 50.0,
@@ -150,7 +162,7 @@ class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
                                     onPressed: () {
                                       print('Button pressed ...');
                                     },
-                                    text: 'Submit',
+                                    text: 'Cancel\n',
                                     options: FFButtonOptions(
                                       width: 150.0,
                                       height: 50.0,
@@ -159,17 +171,17 @@ class _SubmitBDISWidgetState extends State<SubmitBDISWidget> {
                                       iconPadding:
                                           const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: const Color(0xFF0163DA),
+                                      color: const Color(0xFFFFE3E3),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Poppins',
-                                            color: Colors.white,
+                                            color: const Color(0xFFFF4342),
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 2.0,
                                       borderSide: const BorderSide(
-                                        color: Colors.transparent,
+                                        color: Color(0xFFFF4342),
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(2.0),

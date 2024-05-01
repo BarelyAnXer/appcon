@@ -1,5 +1,3 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -865,86 +863,8 @@ class _SignUpAccountWidgetState extends State<SignUpAccountWidget> {
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             30.0, 30.0, 30.0, 0.0),
                         child: FFButtonWidget(
-                          onPressed: !_model.checkboxValue!
-                              ? null
-                              : () async {
-                                  if (_model.passwordTxtTextController.text ==
-                                      _model.confirmPasswordTxtTextController
-                                          .text) {
-                                    GoRouter.of(context).prepareAuthEvent();
-                                    if (_model.passwordTxtTextController.text !=
-                                        _model.confirmPasswordTxtTextController
-                                            .text) {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            'Passwords don\'t match!',
-                                          ),
-                                        ),
-                                      );
-                                      return;
-                                    }
-
-                                    final user = await authManager
-                                        .createAccountWithEmail(
-                                      context,
-                                      _model.emailTxtTextController.text,
-                                      _model.passwordTxtTextController.text,
-                                    );
-                                    if (user == null) {
-                                      return;
-                                    }
-
-                                    await UsersRecord.collection
-                                        .doc(user.uid)
-                                        .update(createUsersRecordData(
-                                          email: _model
-                                              .emailTxtTextController.text,
-                                          photoUrl: '',
-                                          phoneNumber: widget.contactnubmer,
-                                          birthdate: widget.birthdate,
-                                          civilStatus: widget.civilstatus,
-                                          occupation: widget.occupation,
-                                          firstname: widget.firstname,
-                                          middlename: widget.middlename,
-                                          lastname: widget.lastname,
-                                          suffix: widget.suffix,
-                                          nationality: widget.nationality,
-                                          street: widget.street,
-                                          barangay: widget.barangay,
-                                          municipality: widget.municipality,
-                                          province: widget.province,
-                                          zipcode: widget.zipcode,
-                                          bloodtype: widget.bloodtype,
-                                          level: '2',
-                                          houseno: widget.housenumber,
-                                          displayName: '',
-                                          gender: widget.sex,
-                                        ));
-
-                                    context.pushNamedAuth(
-                                        'Verification', context.mounted);
-                                  } else {
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: const Text('Alert'),
-                                          content: const Text(
-                                              'Confirm Password Does\'nt Match'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: const Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  }
-                                },
+                          onPressed:
+                              !_model.checkboxValue! ? null : () async {},
                           text: 'Sign Up',
                           options: FFButtonOptions(
                             width: double.infinity,
