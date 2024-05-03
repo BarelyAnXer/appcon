@@ -10,9 +10,10 @@ import 'schema/blood_inventory_record.dart';
 import 'schema/blood_stocks_record.dart';
 import 'schema/cancellation_reason_record.dart';
 import 'schema/blood_drive_record.dart';
+import 'schema/blood_type_record.dart';
 
 export 'dart:async' show StreamSubscription;
-export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
 export 'package:firebase_core/firebase_core.dart';
 export 'schema/index.dart';
 export 'schema/util/firestore_util.dart';
@@ -23,6 +24,7 @@ export 'schema/blood_inventory_record.dart';
 export 'schema/blood_stocks_record.dart';
 export 'schema/cancellation_reason_record.dart';
 export 'schema/blood_drive_record.dart';
+export 'schema/blood_type_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -207,6 +209,43 @@ Future<List<BloodDriveRecord>> queryBloodDriveRecordOnce({
     queryCollectionOnce(
       BloodDriveRecord.collection,
       BloodDriveRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query BloodTypeRecords (as a Stream and as a Future).
+Future<int> queryBloodTypeRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      BloodTypeRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<BloodTypeRecord>> queryBloodTypeRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      BloodTypeRecord.collection,
+      BloodTypeRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<BloodTypeRecord>> queryBloodTypeRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      BloodTypeRecord.collection,
+      BloodTypeRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
