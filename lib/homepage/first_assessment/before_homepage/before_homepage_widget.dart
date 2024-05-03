@@ -122,7 +122,7 @@ class _BeforeHomepageWidgetState extends State<BeforeHomepageWidget> {
                       const EdgeInsetsDirectional.fromSTEB(20.0, 60.0, 20.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('QuestionHealthAssessment');
+                      context.pushNamed('part1');
                     },
                     text: 'Answer Donor Interview',
                     options: FFButtonOptions(

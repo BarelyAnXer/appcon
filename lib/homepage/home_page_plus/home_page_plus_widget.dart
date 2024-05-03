@@ -1,8 +1,8 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/components/component_homepage/request_schedule/request_schedule_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/homepage/component_homepage/request_schedule/request_schedule_widget.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
@@ -29,8 +29,7 @@ class _HomePagePlusWidgetState extends State<HomePagePlusWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (valueOrDefault<bool>(
-              currentUserDocument?.hasAnswerHealthAssesment, false) !=
+      if (valueOrDefault<bool>(currentUserDocument?.hasPart1Answered, false) !=
           true) {
         context.pushNamed('BeforeHomepage');
       }

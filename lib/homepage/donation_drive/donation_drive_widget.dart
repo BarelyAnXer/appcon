@@ -1,5 +1,5 @@
 import '/backend/backend.dart';
-import '/donation_journey_page/component_donation/check_donation_drive/check_donation_drive_widget.dart';
+import '/components/component_donation/check_donation_drive/check_donation_drive_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';

@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -331,7 +333,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ScheduledDonation',
           path: '/scheduledDonation',
-          builder: (context, params) => const ScheduledDonationWidget(),
+          builder: (context, params) => ScheduledDonationWidget(
+            bloodstockref: params.getParam(
+              'bloodstockref',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['BloodStocks'],
+            ),
+            bloodCenterUserRef: params.getParam(
+              'bloodCenterUserRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+          ),
         ),
         FFRoute(
           name: 'BDISOpening',
@@ -346,12 +361,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'BDISSummary',
           path: '/bDISSummary',
-          builder: (context, params) => const BDISSummaryWidget(),
+          builder: (context, params) => BDISSummaryWidget(
+            part: params.getParam(
+              'part',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: QandAStruct.fromSerializableMap,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'BDISRecap',
-          path: '/bDISRecap',
-          builder: (context, params) => const BDISRecapWidget(),
+          name: 'part1Recap',
+          path: '/part1Recap',
+          builder: (context, params) => Part1RecapWidget(
+            part: params.getParam(
+              'part',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: QandAStruct.fromSerializableMap,
+            ),
+          ),
         ),
         FFRoute(
           name: 'BeforeHomepage',
@@ -359,20 +388,55 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const BeforeHomepageWidget(),
         ),
         FFRoute(
-          name: 'BDISWelcome',
-          path: '/bDISWelcome',
-          builder: (context, params) => const BDISWelcomeWidget(),
+          name: 'DonorInterview',
+          path: '/donorInterview',
+          builder: (context, params) => DonorInterviewWidget(
+            bloodstocksrefid: params.getParam(
+              'bloodstocksrefid',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['BloodStocks'],
+            ),
+          ),
         ),
         FFRoute(
-          name: 'QuestionHealthAssessment',
-          path: '/questionHealthAssessment',
-          builder: (context, params) => const QuestionHealthAssessmentWidget(),
+          name: 'part1',
+          path: '/part1',
+          builder: (context, params) => Part1Widget(
+            counter: params.getParam(
+              'counter',
+              ParamType.int,
+            ),
+          ),
         ),
         FFRoute(
-          name: 'test',
-          path: '/test',
-          builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'test') : const TestWidget(),
+          name: 'part2',
+          path: '/part2',
+          builder: (context, params) => Part2Widget(
+            bloodstockid: params.getParam(
+              'bloodstockid',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['BloodStocks'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'part3',
+          path: '/part3',
+          builder: (context, params) => const Part3Widget(),
+        ),
+        FFRoute(
+          name: 'part2Recap',
+          path: '/part2Recap',
+          builder: (context, params) => Part2RecapWidget(
+            part: params.getParam(
+              'part',
+              ParamType.DataStruct,
+              isList: false,
+              structBuilder: QandAStruct.fromSerializableMap,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -492,6 +556,7 @@ class FFParameters {
     ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
+    StructBuilder<T>? structBuilder,
   }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -510,6 +575,7 @@ class FFParameters {
       type,
       isList,
       collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
     );
   }
 }

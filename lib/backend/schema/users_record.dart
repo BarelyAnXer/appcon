@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 
@@ -160,10 +159,25 @@ class UsersRecord extends FirestoreRecord {
   String get companyProvince => _companyProvince ?? '';
   bool hasCompanyProvince() => _companyProvince != null;
 
-  // "has_answer_health_assesment" field.
-  bool? _hasAnswerHealthAssesment;
-  bool get hasAnswerHealthAssesment => _hasAnswerHealthAssesment ?? false;
-  bool hasHasAnswerHealthAssesment() => _hasAnswerHealthAssesment != null;
+  // "part1" field.
+  QandAStruct? _part1;
+  QandAStruct get part1 => _part1 ?? QandAStruct();
+  bool hasPart1() => _part1 != null;
+
+  // "has_part1_answered" field.
+  bool? _hasPart1Answered;
+  bool get hasPart1Answered => _hasPart1Answered ?? false;
+  bool hasHasPart1Answered() => _hasPart1Answered != null;
+
+  // "company_city" field.
+  String? _companyCity;
+  String get companyCity => _companyCity ?? '';
+  bool hasCompanyCity() => _companyCity != null;
+
+  // "company_barangay" field.
+  String? _companyBarangay;
+  String get companyBarangay => _companyBarangay ?? '';
+  bool hasCompanyBarangay() => _companyBarangay != null;
 
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
@@ -195,8 +209,10 @@ class UsersRecord extends FirestoreRecord {
     _religion = snapshotData['religion'] as String?;
     _usertype = snapshotData['usertype'] as String?;
     _companyProvince = snapshotData['company_province'] as String?;
-    _hasAnswerHealthAssesment =
-        snapshotData['has_answer_health_assesment'] as bool?;
+    _part1 = QandAStruct.maybeFromMap(snapshotData['part1']);
+    _hasPart1Answered = snapshotData['has_part1_answered'] as bool?;
+    _companyCity = snapshotData['company_city'] as String?;
+    _companyBarangay = snapshotData['company_barangay'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -262,7 +278,10 @@ Map<String, dynamic> createUsersRecordData({
   String? religion,
   String? usertype,
   String? companyProvince,
-  bool? hasAnswerHealthAssesment,
+  QandAStruct? part1,
+  bool? hasPart1Answered,
+  String? companyCity,
+  String? companyBarangay,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -295,9 +314,15 @@ Map<String, dynamic> createUsersRecordData({
       'religion': religion,
       'usertype': usertype,
       'company_province': companyProvince,
-      'has_answer_health_assesment': hasAnswerHealthAssesment,
+      'part1': QandAStruct().toMap(),
+      'has_part1_answered': hasPart1Answered,
+      'company_city': companyCity,
+      'company_barangay': companyBarangay,
     }.withoutNulls,
   );
+
+  // Handle nested data for "part1" field.
+  addQandAStructData(firestoreData, part1, 'part1');
 
   return firestoreData;
 }
@@ -336,7 +361,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.religion == e2?.religion &&
         e1?.usertype == e2?.usertype &&
         e1?.companyProvince == e2?.companyProvince &&
-        e1?.hasAnswerHealthAssesment == e2?.hasAnswerHealthAssesment;
+        e1?.part1 == e2?.part1 &&
+        e1?.hasPart1Answered == e2?.hasPart1Answered &&
+        e1?.companyCity == e2?.companyCity &&
+        e1?.companyBarangay == e2?.companyBarangay;
   }
 
   @override
@@ -370,7 +398,10 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.religion,
         e?.usertype,
         e?.companyProvince,
-        e?.hasAnswerHealthAssesment
+        e?.part1,
+        e?.hasPart1Answered,
+        e?.companyCity,
+        e?.companyBarangay
       ]);
 
   @override

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -106,6 +105,26 @@ class BloodStocksRecord extends FirestoreRecord {
   DocumentReference? get blooddonorid => _blooddonorid;
   bool hasBlooddonorid() => _blooddonorid != null;
 
+  // "has_part2_answered" field.
+  bool? _hasPart2Answered;
+  bool get hasPart2Answered => _hasPart2Answered ?? false;
+  bool hasHasPart2Answered() => _hasPart2Answered != null;
+
+  // "has_part3_answered" field.
+  bool? _hasPart3Answered;
+  bool get hasPart3Answered => _hasPart3Answered ?? false;
+  bool hasHasPart3Answered() => _hasPart3Answered != null;
+
+  // "part3" field.
+  QandAStruct? _part3;
+  QandAStruct get part3 => _part3 ?? QandAStruct();
+  bool hasPart3() => _part3 != null;
+
+  // "part2" field.
+  QandAStruct? _part2;
+  QandAStruct get part2 => _part2 ?? QandAStruct();
+  bool hasPart2() => _part2 != null;
+
   void _initializeFields() {
     _id = castToType<int>(snapshotData['Id']);
     _bloodtype = snapshotData['bloodtype'] as String?;
@@ -126,6 +145,10 @@ class BloodStocksRecord extends FirestoreRecord {
     _bloodcenterUserid =
         snapshotData['bloodcenter_userid'] as DocumentReference?;
     _blooddonorid = snapshotData['blooddonorid'] as DocumentReference?;
+    _hasPart2Answered = snapshotData['has_part2_answered'] as bool?;
+    _hasPart3Answered = snapshotData['has_part3_answered'] as bool?;
+    _part3 = QandAStruct.maybeFromMap(snapshotData['part3']);
+    _part2 = QandAStruct.maybeFromMap(snapshotData['part2']);
   }
 
   static CollectionReference get collection =>
@@ -181,6 +204,10 @@ Map<String, dynamic> createBloodStocksRecordData({
   String? bdisStatus,
   DocumentReference? bloodcenterUserid,
   DocumentReference? blooddonorid,
+  bool? hasPart2Answered,
+  bool? hasPart3Answered,
+  QandAStruct? part3,
+  QandAStruct? part2,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -202,8 +229,18 @@ Map<String, dynamic> createBloodStocksRecordData({
       'bdis_status': bdisStatus,
       'bloodcenter_userid': bloodcenterUserid,
       'blooddonorid': blooddonorid,
+      'has_part2_answered': hasPart2Answered,
+      'has_part3_answered': hasPart3Answered,
+      'part3': QandAStruct().toMap(),
+      'part2': QandAStruct().toMap(),
     }.withoutNulls,
   );
+
+  // Handle nested data for "part3" field.
+  addQandAStructData(firestoreData, part3, 'part3');
+
+  // Handle nested data for "part2" field.
+  addQandAStructData(firestoreData, part2, 'part2');
 
   return firestoreData;
 }
@@ -230,7 +267,11 @@ class BloodStocksRecordDocumentEquality implements Equality<BloodStocksRecord> {
         e1?.status == e2?.status &&
         e1?.bdisStatus == e2?.bdisStatus &&
         e1?.bloodcenterUserid == e2?.bloodcenterUserid &&
-        e1?.blooddonorid == e2?.blooddonorid;
+        e1?.blooddonorid == e2?.blooddonorid &&
+        e1?.hasPart2Answered == e2?.hasPart2Answered &&
+        e1?.hasPart3Answered == e2?.hasPart3Answered &&
+        e1?.part3 == e2?.part3 &&
+        e1?.part2 == e2?.part2;
   }
 
   @override
@@ -252,7 +293,11 @@ class BloodStocksRecordDocumentEquality implements Equality<BloodStocksRecord> {
         e?.status,
         e?.bdisStatus,
         e?.bloodcenterUserid,
-        e?.blooddonorid
+        e?.blooddonorid,
+        e?.hasPart2Answered,
+        e?.hasPart3Answered,
+        e?.part3,
+        e?.part2
       ]);
 
   @override
